@@ -1,0 +1,17 @@
+env/
+
+# Editor/IDE specific files
+.vscode/
+.DS_Store
+
+# Build output
+/build/
+/dist/
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Cache and log files
+.sass-cache/
+*.log

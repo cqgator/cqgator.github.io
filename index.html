@@ -29,7 +29,7 @@
             font-family: 'Raleway', sans-serif;
             font-size: 5rem;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
@@ -38,14 +38,17 @@
             font-size: 1.2rem;
             font-weight: 300;
             text-align: center;
+			margin-top: 0px;
             margin-bottom: 15px;
+			/* margin: 0; Remove default margins */
         }
 
         .description {
             font-family: 'Open Sans', sans-serif;
             font-size: 1rem;
             text-align: center;
-            margin-top: -10px;
+            /* margin-top: -10px; */
+			margin: 0; /*  Remove default margins */
         }
 
         iframe {
@@ -55,29 +58,52 @@
             border: none;
         }
 
+        /* Responsive adjustments for social icons */
         .social-icons {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .social-icons a {
-            margin: 0 15px;
+            margin: 10px; /* Increased margin for default size */
         }
 
         .social-icons img {
-            width: 40px;
+            width: 40px; /* Larger default size */
             height: 40px;
             filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+            transition: width 0.3s, height 0.3s; /* Smooth transition effect for resizing */
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) { 
+            .social-icons img {
+                width: 30px;
+                height: 30px;
+            }
+            .social-icons a {
+                margin: 5px; 
+            }
+        }
+
+        /* Styles for the text background */
+        .text-container {
+            background-color: rgba(0, 0, 0, 0.3); /* More transparent black background */
+            padding: 10px; /* Reduced padding to "hug" the text */
+            border-radius: 8px;
+			margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <h1>cqgator</h1>
 
-    <p class="intro">hi, i'm charlie.</p>
-    <p class="description">i'm making music. most of it is on soundcloud right now and will be on spotify soon.</p> 
-    <p class="description">my new video is below. enjoy &#x263A;</p> 
+	<div class="text-container"> <p class="intro">hi, i'm charlie.</p>
+        <p class="description">i'm making music. most of it is on soundcloud right now and will be on spotify soon.</p> 
+        <p class="description">my new video is below. enjoy &#x263A;</p> 
+    </div>
 
     <div class="social-icons">
         <a href="https://open.spotify.com/artist/6ckUpUiOHgUxNTyPZtIqvd" target="_blank">

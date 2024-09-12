@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src="redirect.js"></script>
+    <script src="redirect.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>cqgator</title>
@@ -17,7 +17,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 100vh; /* Ensure the body is at least the viewport height */
             background-image: url('chuck.jpg');
             background-size: cover;
             background-position: center;
@@ -38,24 +38,28 @@
             font-size: 1.2rem;
             font-weight: 300;
             text-align: center;
-			margin-top: 0px;
+            margin-top: 0px;
             margin-bottom: 15px;
-			/* margin: 0; Remove default margins */
         }
 
         .description {
             font-family: 'Open Sans', sans-serif;
             font-size: 1rem;
             text-align: center;
-            /* margin-top: -10px; */
-			margin: 0; /*  Remove default margins */
+            margin: 0; 
         }
 
+        /* Common iframe styles - removed height: auto */
         iframe {
             width: 80%;
             max-width: 800px;
-            height: 450px;
             border: none;
+            margin-bottom: 20px;
+        }
+
+        /* Specific style for Spotify Embed */
+        .spotify-embed {
+            height: 352px; 
         }
 
         /* Responsive adjustments for social icons */
@@ -67,17 +71,16 @@
         }
 
         .social-icons a {
-            margin: 10px; /* Increased margin for default size */
+            margin: 10px; 
         }
 
         .social-icons img {
-            width: 40px; /* Larger default size */
+            width: 40px; 
             height: 40px;
             filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
-            transition: width 0.3s, height 0.3s; /* Smooth transition effect for resizing */
+            transition: width 0.3s, height 0.3s; 
         }
 
-        /* Media query for smaller screens */
         @media (max-width: 600px) { 
             .social-icons img {
                 width: 30px;
@@ -88,21 +91,24 @@
             }
         }
 
-        /* Styles for the text background */
         .text-container {
-            background-color: rgba(0, 0, 0, 0.3); /* More transparent black background */
-            padding: 10px; /* Reduced padding to "hug" the text */
+            background-color: rgba(0, 0, 0, 0.3); 
+            padding: 10px; 
             border-radius: 8px;
-			margin-bottom: 10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <h1>cqgator</h1>
 
-	<div class="text-container"> <p class="intro">hi, i'm charlie.</p>
-        <p class="description">i'm making music. most of it is on soundcloud right now and will be on spotify soon.</p> 
-        <p class="description">my new video is below. enjoy &#x263A;</p> 
+    <div class="text-container"> 
+        <p class="intro">hi, i'm charlie.</p>
+        <p class="description">NEW SONG "around for me" w/ zeroindex & shinji death cult</p>
+        <br>     
+        <p class="description">my soundcloud got hella music and more is coming to spotify soon !!</p>
+        <br>
+        <p class="description">enjoy ☺</p>
     </div>
 
     <div class="social-icons">
@@ -129,9 +135,14 @@
         </a>
     </div>
 
+    <iframe class="spotify-embed" style="border-radius:12px" src="https://open.spotify.com/embed/track/0sz6obMx7QCMaZsDPWSQTl?utm_source=generator" 
+        frameBorder="0" allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
     <iframe width="560" height="315" src="https://www.youtube.com/embed/3AdgMybIndk" 
             title="YouTube video player" frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen></iframe> 
+
 </body>
 </html>

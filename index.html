@@ -57,9 +57,18 @@
             margin-bottom: 20px;
         }
 
-        /* Specific style for Spotify Embed */
+        .spotify-container {
+            display: flex; /* Use flexbox for horizontal arrangement */
+            justify-content: center; /* Center horizontally */
+            width: 80%; /* Matches iframe width */
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
         .spotify-embed {
-            height: 352px; 
+            height: 352px;
+            flex: 1; /* Allow each iframe to take equal width */
+            margin: 0 5px; /* Add small margin between iframes */
         }
 
         /* Responsive adjustments for social icons */
@@ -97,18 +106,39 @@
             border-radius: 8px;
             margin-bottom: 10px;
         }
+
+        .text-section {
+            margin-bottom: 15px; /* Add spacing between sections */
+        }
+
+        .show-image {
+            width: 85%; /* Adjust width as needed */
+            max-width: 450px; /* Optional: Set a maximum width for larger screens*/
+            margin: 0 auto 15px auto; /* Center the image horizontally */
+            display: block; /* Makes the image behave like a block element */
+        }
     </style>
 </head>
 <body>
     <h1>cqgator</h1>
 
-    <div class="text-container"> 
-        <p class="intro">hi, i'm charlie.</p>
-        <p class="description">NEW SONG "around for me" w/ zeroindex & shinji death cult</p>
-        <br>     
-        <p class="description">my soundcloud got hella music and more is coming to spotify soon !!</p>
-        <br>
-        <p class="description">enjoy ☺</p>
+    <div class="text-container">
+        <div class="text-section">
+            <p class="intro">hi, i'm charlie.</p>
+            <p class="description">i'm playing a show this Friday Feb 7 !! in NYC !!</p>
+            <p class="description">it's FREE !! RSVP by clicking the flyer !!</p>
+        </div>
+
+        <a href="https://posh.vip/e/ladder-talk-first-album-release-show" target="_blank">
+            <img class="show-image" src="images/feb7show.jpg" alt="Feb 7th Show">
+        </a>
+
+
+        <div class="text-section">
+            <p class="description">music on my spotify & soundcloud (links below)</p>
+            <br>
+            <p class="description">enjoy ☺</p>
+        </div>
     </div>
 
     <div class="social-icons">
@@ -135,9 +165,10 @@
         </a>
     </div>
 
-    <iframe class="spotify-embed" style="border-radius:12px" src="https://open.spotify.com/embed/track/0sz6obMx7QCMaZsDPWSQTl?utm_source=generator" 
-        frameBorder="0" allowfullscreen="" 
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="spotify-container">
+        <iframe class="spotify-embed" style="border-radius:12px" src="https://open.spotify.com/embed/track/0sz6obMx7QCMaZsDPWSQTl?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe class="spotify-embed" style="border-radius:12px" src="https://open.spotify.com/embed/track/2qoOg5dS5bzpu2sxng0dLh?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/3AdgMybIndk" 
             title="YouTube video player" frameborder="0" 

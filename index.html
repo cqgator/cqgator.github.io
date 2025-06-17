@@ -39,17 +39,17 @@
             font-weight: 300;
             text-align: center;
             margin-top: 0px;
-            margin-bottom: 15px;
+            margin-bottom: 0px;
         }
 
         .description {
             font-family: 'Open Sans', sans-serif;
             font-size: 1rem;
             text-align: center;
-            margin: 0; 
+            margin: 0;
         }
 
-        /* Common iframe styles - removed height: auto */
+        /* Common iframe styles */
         iframe {
             width: 80%;
             max-width: 800px;
@@ -61,6 +61,7 @@
             display: flex; /* Use flexbox for vertical arrangement */
             flex-direction: column; /* Stack items vertically */
             justify-content: center; /* Center vertically */
+            align-items: center; /* Center items horizontally within the flex container */
             width: 80%; /* Matches iframe width */
             max-width: 800px;
             margin-bottom: 20px;
@@ -72,69 +73,10 @@
             margin-bottom: 10px; /* Add space between iframes */
         }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            /*Increase Social Icon Size*/
-            transform: scale(1.3); /*Increase size by 30%*/
-        }
-
-        .social-icons a {
-            margin: 10px; 
-        }
-
-        .social-icons img {
-            width: 40px; 
-            height: 40px;
-            filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
-            transition: width 0.3s, height 0.3s; 
-        }
-
-        @media (max-width: 600px) { 
-            .social-icons img {
-                width: 30px;
-                height: 30px;
-            }
-            .social-icons a {
-                margin: 5px; 
-            }
-        }
-
-        .text-container {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 15px; 
-    text-align: center;
-    width: 80%; /* Match width of Spotify embeds */
-    max-width: 800px;
-}
-
-.show-image {
-    width: 80%; /* Reduced width */
-    max-width: 500px; /* Reduced max-width */
-    margin: 0 auto 15px auto;
-    display: block;
-}
-
-/* Media Query to keep proportions on larger screens*/
-@media (min-width: 768px) {
-    .text-container {
-        width: 80%; /* maintain proportions with spotify embeds */
-    }
-}
-
-        .text-section {
-            font-size: 1.4rem;
-            line-height: 1.4;
-        }
-
         .soundcloud-container {
             width: 100%; /* Make SoundCloud embed full width */
             max-width: 800px; /* Keep a maximum width for responsiveness */
-            margin: 20px auto;
+            margin: 20px auto; /* Center the container horizontally */
         }
 
         .soundcloud-embed {
@@ -142,7 +84,86 @@
             height: 250px;
             margin-bottom: 10px;
         }
-            </style>
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Space below the icons */
+            flex-wrap: wrap;
+            transform: scale(1.3);
+            margin-top: 0; /* Removed the extra space above the icons */
+        }
+
+        .social-icons a {
+            margin: 10px;
+        }
+
+        .social-icons img {
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.5));
+            transition: width 0.3s, height 0.3s;
+        }
+
+        @media (max-width: 600px) {
+            .social-icons img {
+                width: 30px;
+                height: 30px;
+            }
+            .social-icons a {
+                margin: 5px;
+            }
+        }
+
+        .text-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px; /* Add space between containers */
+            text-align: center;
+            width: 80%; /* Match width of Spotify embeds */
+            max-width: 800px;
+        }
+
+        .text-section {
+            font-size: 1.4rem;
+            line-height: 1.4;
+        }
+
+        /* Styles for the container holding the two images */
+        .image-pair-container {
+            display: flex; /* Arrange children (images) in a row */
+            justify-content: center; /* Center the images horizontally within the container */
+            align-items: flex-start; /* Align images to the top (or center, your preference) */
+            width: 80%; /* Match the width of text containers and embeds */
+            max-width: 800px;
+            margin: 0 auto 15px auto; /* Center the container and add space below */
+            gap: 10px; /* Add space between the images */
+            flex-wrap: wrap; /* Allow images to wrap to the next line on small screens */
+        }
+
+        /* Styles for the individual images within the container */
+        .paired-image {
+            height: 300px; /* Set a consistent height for all images */
+            width: auto; /* Allow width to adjust to maintain aspect ratio */
+            /* If you want them to share space equally: */
+            /* flex: 1; */
+            /* Optional: add a small margin between images if gap isn't enough */
+            /* margin: 0 5px; */
+        }
+
+
+        /* Media Query to keep proportions on larger screens*/
+        @media (min-width: 768px) {
+            .text-container {
+                width: 80%; /* maintain proportions with spotify embeds */
+            }
+             .image-pair-container {
+                width: 80%; /* Ensure image container also maintains width */
+             }
+        }
+
+    </style>
 </head>
 <body>
     <h1>cqgator</h1>
@@ -150,14 +171,24 @@
     <div class="text-container">
         <div class="text-section">
             <p class="intro">hi, i'm charlie.</p>
-            <p class="description">i'm playing a show this Friday Feb 7 !! in NYC !!</p>
-            <p class="description">it's FREE !! RSVP by clicking the flyer !!</p>
         </div>
     </div>
 
-    <a href="https://posh.vip/e/ladder-talk-first-album-release-show" target="_blank">
-        <img class="show-image" src="images/feb7show_V2.png" alt="Feb 7th Show">
-    </a>
+    <!-- First pair of images -->
+    <div class="image-pair-container">
+        <img class="paired-image" src="images/IMG_5175.PNG" alt="Promotional Image 1">
+        <!-- Replace 'images/your-second-image.jpg' with the actual path -->
+        <img class="paired-image" src="images/pb.jpg" alt="Promotional Image 2">
+    </div>
+
+    <!-- Second pair of images - ADDED THIS BLOCK -->
+    <div class="image-pair-container">
+        <!-- Replace 'images/your-third-image.jpg' with the actual path -->
+        <img class="paired-image" src="images/chuck.jpg" alt="Promotional Image 3">
+        <!-- Replace 'images/your-fourth-image.jpg' with the actual path -->
+        <img class="paired-image" src="images/bike.jpg" alt="Promotional Image 4">
+    </div>
+
 
     <div class="text-container">
         <div class="text-section">
@@ -200,10 +231,10 @@
         <iframe class="spotify-embed" style="border-radius:12px" src="https://open.spotify.com/embed/track/0sz6obMx7QCMaZsDPWSQTl?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/3AdgMybIndk" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe> 
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/3AdgMybIndk"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
 
 </body>
 </html>

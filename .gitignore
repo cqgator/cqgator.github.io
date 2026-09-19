@@ -1,17 +1,21 @@
+﻿# Environment & Dependencies
 env/
-
-# Editor/IDE specific files
-.vscode/
-.DS_Store
-
-# Build output
-/build/
-/dist/
-
-# Dependency directories
 node_modules/
 vendor/
 
-# Cache and log files
+# Build Output
+/build/
+/dist/
+
+# Cache & Logs
 .sass-cache/
 *.log
+
+# IDE & Editor Configs
+.vscode/
+.idea/
+.DS_Store
+.codebuddy/
+
+# Local manual backups
+Old builds/

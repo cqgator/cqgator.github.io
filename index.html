@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cqgator</title>
   <meta name="description" content="cqgator — music, visuals, and links.">
+
+  <!-- Social link previews (iMessage / Discord / Twitter / etc.) -->
+  <meta property="og:type" content="music.musician">
+  <meta property="og:title" content="cqgator">
+  <meta property="og:description" content="music, visuals, and links.">
+  <meta property="og:image" content="https://cqgator.com/chuck.jpg">
+  <meta property="og:url" content="https://cqgator.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0a0c09">
+  <link rel="icon" href="favicon.ico" sizes="32x32">
+
   <!--
     Root cause behind the persistent YouTube "Error 153" turned out to be
     the browser's default Referrer-Policy suppressing the referrer header
@@ -17,7 +28,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet">
 
-
   <style>
     :root {
       --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
@@ -27,7 +37,6 @@
       --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
       --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
       --text-hero: clamp(3.5rem,   1rem    + 8vw,    10rem);
-
 
       --space-1:  0.25rem;
       --space-2:  0.5rem;
@@ -42,20 +51,16 @@
       --space-20: 5rem;
       --space-24: 6rem;
 
-
       --radius-sm: 0.25rem;
       --radius-md: 0.5rem;
       --radius-lg: 0.75rem;
       --radius-full: 9999px;
 
-
       --font-display: 'Space Mono', 'Courier New', monospace;
       --font-body:    'DM Sans', system-ui, sans-serif;
 
-
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
       --transition: 220ms var(--ease);
-
 
       --color-bg:             #0a0c09;
       --color-surface:        #0f1210;
@@ -74,11 +79,9 @@
         0 0 28px rgba(127,255,110,0.22),
         inset 0 0 12px rgba(127,255,110,0.08);
 
-
       --content-default: 960px;
       --shadow-lg: 0 12px 48px rgba(0,0,0,0.7);
     }
-
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html {
@@ -103,7 +106,6 @@
     ::selection { background: rgba(127,255,110,0.2); color: var(--color-primary); }
     :focus-visible { outline: 1px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
 
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after {
@@ -112,7 +114,6 @@
         transition-duration: 0.01ms !important;
       }
     }
-
 
     #cursor-dot,
     #cursor-ring {
@@ -128,7 +129,7 @@
       height: 8px;
       background: var(--color-primary);
       border-radius: 50%;
-      mix-blend-mode: difference;
+      box-shadow: 0 0 8px rgba(127,255,110,0.6);
       transition: width 0.15s var(--ease), height 0.15s var(--ease);
     }
     #cursor-ring {
@@ -149,7 +150,6 @@
       body { cursor: auto; }
       button, a, .gallery-item { cursor: pointer; }
     }
-
 
     #noise,
     #scanlines {
@@ -174,7 +174,6 @@
         rgba(0,0,0,0.08) 4px
       );
     }
-
 
     @keyframes glitch-1 {
       0%, 90%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
@@ -207,7 +206,6 @@
     }
     .glitch-wrap::before { animation: glitch-1 6s steps(1) infinite; }
     .glitch-wrap::after { animation: glitch-2 6s steps(1) infinite 0.3s; }
-
 
     #hero {
       position: relative;
@@ -305,16 +303,15 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: var(--space-5) var(--space-8);
+      isolation: isolate;
+      padding: var(--space-4) var(--space-8);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--space-6);
       backdrop-filter: blur(20px) saturate(1.5);
       background: rgba(10,12,9,0.6);
       border-bottom: 1px solid var(--color-border);
@@ -385,7 +382,6 @@
       pointer-events: none;
     }
 
-
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .nav-social { border-left: none; padding-left: 0; }
@@ -395,7 +391,6 @@
       .nav-social { gap: var(--space-3); }
       .nav-social svg { width: 15px; height: 15px; }
     }
-
 
     section {
       position: relative;
@@ -433,7 +428,6 @@
       line-height: 1.1;
       margin-bottom: var(--space-8);
     }
-
 
     #music {
       background: var(--color-surface);
@@ -489,6 +483,7 @@
     .embed-frame.spotify-track { height: 152px; }
     .embed-frame.soundcloud { height: 166px; }
     .embed-frame.spotify-list { height: 352px; }
+    .embed-frame.soundcloud-playlist { height: 300px; }
     .embed-label {
       padding: var(--space-3) var(--space-4);
       font-family: var(--font-display);
@@ -503,11 +498,10 @@
       .embed-frame.spotify-list { height: 380px; }
     }
 
-
     #gallery { background: var(--color-bg); }
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: var(--space-3);
     }
     .gallery-item {
@@ -520,10 +514,8 @@
       border: 1px solid var(--color-border);
       cursor: none;
       min-width: 0;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
     }
-    .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; min-height: 0; }
-    .gallery-item.wide { grid-column: span 2; aspect-ratio: 16 / 9; }
     .gallery-item img {
       width: 100%;
       height: 100%;
@@ -551,10 +543,7 @@
     }
     @media (max-width: 700px) {
       .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .gallery-item.tall { grid-row: span 1; aspect-ratio: 3 / 4; }
-      .gallery-item.wide { grid-column: span 2; }
     }
-
 
     body.lb-open {
       cursor: zoom-out;
@@ -598,7 +587,6 @@
       pointer-events: none;
     }
 
-
     #video-section {
       background: var(--color-surface);
       border-top: 1px solid var(--color-border);
@@ -619,7 +607,6 @@
       width: 100%;
       height: 100%;
     }
-
 
     /* currently + watching share one row on wide screens */
     #currently-watching { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
@@ -671,7 +658,6 @@
       border-radius: var(--radius-sm);
       z-index: 2;
     }
-
 
     .watch-list {
       list-style: none;
@@ -735,7 +721,6 @@
       color: var(--color-primary);
     }
 
-
     #connect {
       background: var(--color-bg);
       text-align: center;
@@ -783,7 +768,6 @@
       pointer-events: none;
     }
 
-
     .email-link {
       display: inline-block;
       font-family: var(--font-display);
@@ -813,7 +797,6 @@
       transform-origin: left;
     }
 
-
     footer {
       position: relative;
       z-index: 3;
@@ -842,37 +825,53 @@
       filter: saturate(0.6);
     }
 
+		.marquee-wrap {
+	  overflow: hidden;
+	  border-top: 1px solid var(--color-border);
+	  border-bottom: 1px solid var(--color-border);
+	  padding: var(--space-4) 0;
+	  background: var(--color-surface);
+	  position: relative;
+	  z-index: 3;
+	}
+	.marquee-track {
+	  display: flex;
+	  gap: var(--space-6);
+	  width: max-content;
+	  will-change: transform;
+	  transform: translate3d(0,0,0);
+	  animation: marquee 28s linear infinite;
+	}
+	.marquee-set {
+	  display: flex;
+	  gap: var(--space-6);
+	}
+	@keyframes marquee {
+	  0%   { transform: translate3d(0,0,0); }
+	  100% { transform: translate3d(-50%,0,0); }
+	}
+	.marquee-item {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: var(--space-6);
+	  font-family: var(--font-display);
+	  font-size: var(--text-lg);
+	  color: var(--color-text-faint);
+	  white-space: nowrap;
+	  user-select: none;
+	}
+	.marquee-item .accent { color: var(--color-primary); }
 
-    .marquee-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      padding: var(--space-4) 0;
-      background: var(--color-surface);
-      position: relative;
-      z-index: 3;
-    }
-    .marquee-track {
-      display: flex;
-      gap: var(--space-8);
-      width: max-content;
-      animation: marquee 32s linear infinite;
-      backface-visibility: hidden;
-      transform: translate3d(0, 0, 0);
-    }
-    @keyframes marquee {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
-    }
-    .marquee-item {
-      font-family: var(--font-display);
-      font-size: var(--text-lg);
-      color: var(--color-text-faint);
-      white-space: nowrap;
-      user-select: none;
-    }
-    .marquee-item .accent { color: var(--color-primary); }
-
+	@media (prefers-reduced-motion: reduce) {
+	  .marquee-wrap { overflow: visible; }
+	  .marquee-track {
+		flex-wrap: wrap;
+		width: 100%;
+		justify-content: center;
+	  }
+	  .marquee-set { flex-wrap: wrap; justify-content: center; }
+	  .marquee-dup { display: none; }
+	}
 
     .fade-in,
     .reveal-up {
@@ -886,7 +885,6 @@
       opacity: 1;
       transform: translateY(0);
     }
-
 
     .viz-bars {
       display: flex;
@@ -914,7 +912,6 @@
       0%, 100% { height: 6px; }
       50% { height: 28px; }
     }
-
 
     #nav-toggle {
       display: none;
@@ -971,12 +968,10 @@
 </head>
 <body>
 
-
 <div id="noise"></div>
 <div id="scanlines"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
-
 
 <nav>
   <a href="#hero" class="nav-logo">cqgator</a>
@@ -1015,7 +1010,6 @@
   </button>
 </nav>
 
-
 <div id="mobile-nav" role="dialog" aria-label="Navigation menu">
   <button id="mobile-nav-close" type="button" aria-label="Close menu">✕</button>
   <a href="#music" class="mob-link">music</a>
@@ -1025,7 +1019,6 @@
   <a href="#watching" class="mob-link">watching</a>
   <a href="#connect" class="mob-link">find me</a>
 </div>
-
 
 <section id="hero">
   <div id="hero-bg"></div>
@@ -1043,32 +1036,34 @@
   </div>
 </section>
 
-
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
-    <span class="marquee-item">charlie <span class="accent">✦</span></span>
-    <span class="marquee-item">artist <span class="accent">✦</span></span>
-    <span class="marquee-item">dj <span class="accent">✦</span></span>
-    <span class="marquee-item">hiker <span class="accent">✦</span></span>
-    <span class="marquee-item">cinephile <span class="accent">✦</span></span>
-    <span class="marquee-item">sports fan <span class="accent">✦</span></span>
-    <span class="marquee-item">skier <span class="accent">✦</span></span>
-    <span class="marquee-item">gator <span class="accent">✦</span></span>
-    <span class="marquee-item">american <span class="accent">✦</span></span>
-    <span class="marquee-item">canadian <span class="accent">✦</span></span>
-    <span class="marquee-item">charlie <span class="accent">✦</span></span>
-    <span class="marquee-item">artist <span class="accent">✦</span></span>
-    <span class="marquee-item">dj <span class="accent">✦</span></span>
-    <span class="marquee-item">hiker <span class="accent">✦</span></span>
-    <span class="marquee-item">cinephile <span class="accent">✦</span></span>
-    <span class="marquee-item">sports fan <span class="accent">✦</span></span>
-    <span class="marquee-item">skier <span class="accent">✦</span></span>
-    <span class="marquee-item">gator <span class="accent">✦</span></span>
-    <span class="marquee-item">american <span class="accent">✦</span></span>
-    <span class="marquee-item">canadian <span class="accent">✦</span></span>
+    <div class="marquee-set">
+      <span class="marquee-item">charlie<span class="accent">✦</span></span>
+      <span class="marquee-item">artist<span class="accent">✦</span></span>
+      <span class="marquee-item">dj<span class="accent">✦</span></span>
+      <span class="marquee-item">hiker<span class="accent">✦</span></span>
+      <span class="marquee-item">cinephile<span class="accent">✦</span></span>
+      <span class="marquee-item">sports fan<span class="accent">✦</span></span>
+      <span class="marquee-item">skier<span class="accent">✦</span></span>
+      <span class="marquee-item">gator<span class="accent">✦</span></span>
+      <span class="marquee-item">american<span class="accent">✦</span></span>
+      <span class="marquee-item">canadian<span class="accent">✦</span></span>
+    </div>
+    <div class="marquee-set marquee-dup">
+      <span class="marquee-item">charlie<span class="accent">✦</span></span>
+      <span class="marquee-item">artist<span class="accent">✦</span></span>
+      <span class="marquee-item">dj<span class="accent">✦</span></span>
+      <span class="marquee-item">hiker<span class="accent">✦</span></span>
+      <span class="marquee-item">cinephile<span class="accent">✦</span></span>
+      <span class="marquee-item">sports fan<span class="accent">✦</span></span>
+      <span class="marquee-item">skier<span class="accent">✦</span></span>
+      <span class="marquee-item">gator<span class="accent">✦</span></span>
+      <span class="marquee-item">american<span class="accent">✦</span></span>
+      <span class="marquee-item">canadian<span class="accent">✦</span></span>
+    </div>
   </div>
 </div>
-
 
 <section id="music">
   <div class="container">
@@ -1088,7 +1083,6 @@
       </div>
     </div>
 
-
     <div class="music-grid fade-in">
       <div class="embed-card">
         <div class="embed-label">spotify · when i need you</div>
@@ -1102,7 +1096,6 @@
         </div>
       </div>
 
-
       <div class="embed-card">
         <div class="embed-label">spotify · around for me</div>
         <div class="embed-frame spotify-track">
@@ -1114,7 +1107,6 @@
           </iframe>
         </div>
       </div>
-
 
       <div class="embed-card wide">
         <div class="embed-label">soundcloud · go in</div>
@@ -1129,8 +1121,7 @@
         </div>
       </div>
 
-
-      <div class="embed-card wide">
+      <div class="embed-card">
         <div class="embed-label">spotify · catalog</div>
         <div class="embed-frame spotify-list">
           <iframe
@@ -1141,10 +1132,23 @@
           </iframe>
         </div>
       </div>
+
+      <div class="embed-card">
+        <div class="embed-label">soundcloud · dj sets</div>
+        <div class="embed-frame soundcloud-playlist">
+          <iframe
+            scrolling="no"
+            frameborder="no"
+            allow="autoplay; encrypted-media"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2302192014&amp;color=%237fff6e&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false&amp;show_teaser=true&amp;visual=true"
+            loading="lazy"
+            title="dj sets by cqgator on SoundCloud">
+          </iframe>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
 
 <section id="video-section">
   <div class="container">
@@ -1165,31 +1169,14 @@
   </div>
 </section>
 
-
 <section id="gallery">
   <div class="container">
     <p class="section-label">03 — recents</p>
-    <div class="gallery-grid fade-in" style="margin-top: var(--space-2);">
-      <button type="button" class="gallery-item tall">
-        <img src="images/bike.JPG" alt="" width="400" height="600" loading="lazy">
-        <span class="gallery-item-overlay"></span>
-      </button>
-      <button type="button" class="gallery-item">
-        <img src="images/pb.JPG" alt="" width="400" height="300" loading="lazy">
-        <span class="gallery-item-overlay"></span>
-      </button>
-      <button type="button" class="gallery-item">
-        <img src="images/IMG_5175.PNG" alt="" width="400" height="300" loading="lazy">
-        <span class="gallery-item-overlay"></span>
-      </button>
-      <button type="button" class="gallery-item wide">
-        <img src="images/chuck.JPG" alt="" width="800" height="400" loading="lazy">
-        <span class="gallery-item-overlay"></span>
-      </button>
+    <div class="gallery-grid fade-in" id="gallery-grid" style="margin-top: var(--space-2);">
+      <li class="watch-loading" style="list-style:none;">loading…</li>
     </div>
   </div>
 </section>
-
 
 <section id="currently-watching">
   <div class="container">
@@ -1230,7 +1217,6 @@
     </div>
   </div>
 </section>
-
 
 <section id="connect">
   <div class="container">
@@ -1280,18 +1266,15 @@
   </div>
 </section>
 
-
 <footer>
   <p>© 2026 cqgator <span class="flag-nod" aria-hidden="true">🇺🇸🇨🇦</span></p>
   <p>enjoy</p>
 </footer>
 
-
 <div id="lb-overlay" role="dialog" aria-modal="true" aria-label="Image">
   <img alt="">
   <span id="lb-hint">click / esc to close</span>
 </div>
-
 
 <script>
   (function () {
@@ -1302,14 +1285,12 @@
     let rx = -100;
     let ry = -100;
 
-
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX;
       my = e.clientY;
       dot.style.left = mx + 'px';
       dot.style.top = my + 'px';
     });
-
 
     function animRing() {
       rx += (mx - rx) * 0.12;
@@ -1320,17 +1301,14 @@
     }
     animRing();
 
-
     document.addEventListener('pointerover', function (e) {
       const hit = e.target.closest('a, button');
       document.body.classList.toggle('is-pointer', Boolean(hit));
     });
 
-
     const toggle = document.getElementById('nav-toggle');
     const mobileNav = document.getElementById('mobile-nav');
     const closeBtn = document.getElementById('mobile-nav-close');
-
 
     toggle.addEventListener('click', function () {
       mobileNav.classList.add('open');
@@ -1344,10 +1322,8 @@
       });
     });
 
-
     const lbOverlay = document.getElementById('lb-overlay');
     const lbImg = lbOverlay.querySelector('img');
-
 
     function openLightbox(src) {
       lbImg.src = src;
@@ -1355,25 +1331,45 @@
       document.body.classList.add('lb-open');
       document.body.style.overflow = 'hidden';
     }
-    function closeLightbox() {
-      lbOverlay.classList.remove('open');
-      document.body.classList.remove('lb-open');
-      document.body.style.overflow = '';
-      lbImg.removeAttribute('src');
-    }
+	function closeLightbox() {
+	  lbOverlay.classList.remove('open');
+	  document.body.classList.remove('lb-open');
+	  document.body.style.overflow = '';
+	  lbImg.removeAttribute('src');
+	}
 
+	const galleryGrid = document.getElementById('gallery-grid');
+	if (galleryGrid) {
+	  fetch('images/recents/manifest.json')
+		.then(function (res) { return res.json(); })
+		.then(function (files) {
+		  const images = files.slice(0, 4);
+		  if (!images.length) throw new Error('empty manifest');
 
-    document.querySelectorAll('.gallery-item').forEach(function (item) {
-      item.addEventListener('click', function () {
-        const img = item.querySelector('img');
-        if (img) openLightbox(img.src);
-      });
-    });
+		  galleryGrid.innerHTML = '';
+		  images.forEach(function (name) {
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.className = 'gallery-item';
+			btn.innerHTML =
+			  '<img src="images/recents/' + name + '" alt="" loading="lazy">' +
+			  '<span class="gallery-item-overlay"></span>';
+			btn.addEventListener('click', function () {
+			  const img = btn.querySelector('img');
+			  if (img) openLightbox(img.src);
+			});
+			galleryGrid.appendChild(btn);
+		  });
+		})
+		.catch(function () {
+		  galleryGrid.innerHTML = '<li class="watch-empty" style="list-style:none;">gallery unavailable right now</li>';
+		});
+	}
+
     lbOverlay.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeLightbox();
     });
-
 
     const revealNodes = document.querySelectorAll('.fade-in, .reveal-up');
     if ('IntersectionObserver' in window) {
@@ -1389,7 +1385,6 @@
     } else {
       revealNodes.forEach(function (node) { node.classList.add('is-visible'); });
     }
-
 
     /* ---------------------------------------------------------------
        Rotating reference image ("currently" column).
@@ -1442,7 +1437,6 @@
       });
     }
 
-
     /* ---------------------------------------------------------------
        Letterboxd RSS ("watching" column).
        Letterboxd's feed has no CORS headers, so a direct fetch() from
@@ -1487,7 +1481,6 @@
     }
   })();
 </script>
-
 
 </body>
 </html>

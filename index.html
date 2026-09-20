@@ -14,7 +14,7 @@
   <meta property="og:url" content="https://cqgator.com/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0a0c09">
-  <link rel="icon" href="favicon.ico" sizes="32x32">
+  <link rel="icon" href="favicon.ico?v=2" sizes="32x32">
 
   <!--
     Root cause behind the persistent YouTube "Error 153" turned out to be
@@ -308,7 +308,7 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       isolation: isolate;
-      padding: var(--space-4) var(--space-8);
+      padding: var(--space-5) var(--space-8);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -377,8 +377,8 @@
       transform: translateY(-1px);
     }
     .nav-social svg {
-      width: 16px;
-      height: 16px;
+      width: 19px;
+      height: 19px;
       pointer-events: none;
     }
 
@@ -387,9 +387,9 @@
       .nav-social { border-left: none; padding-left: 0; }
     }
     @media (max-width: 600px) {
-      nav { padding: var(--space-4); gap: var(--space-3); }
+      nav { padding: var(--space-5) var(--space-4); gap: var(--space-3); }
       .nav-social { gap: var(--space-3); }
-      .nav-social svg { width: 15px; height: 15px; }
+      .nav-social svg { width: 17px; height: 17px; }
     }
 
     section {
@@ -494,7 +494,6 @@
       border-bottom: 1px solid var(--color-border);
     }
     @media (max-width: 700px) {
-      .music-grid { grid-template-columns: minmax(0, 1fr); }
       .embed-frame.spotify-list { height: 380px; }
     }
 
@@ -521,11 +520,10 @@
       height: 100%;
       object-fit: cover;
       min-height: 180px;
-      filter: saturate(0.7) brightness(0.9);
-      transition: filter 0.5s var(--ease), transform 0.6s var(--ease);
+      filter: none;
+      transition: transform 0.6s var(--ease);
     }
     .gallery-item:hover img {
-      filter: saturate(1) brightness(1);
       transform: scale(1.04);
     }
     .gallery-item-overlay {
@@ -712,7 +710,9 @@
       padding: var(--space-4) 0;
     }
     .watch-footer-link {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
       margin-top: var(--space-6);
       font-family: var(--font-display);
       font-size: var(--text-xs);
@@ -817,6 +817,10 @@
       align-items: center;
       gap: var(--space-2);
     }
+    .copy-mark {
+      position: relative;
+      top: -0.06em;
+    }
     .flag-nod {
       display: inline-flex;
       gap: 3px;
@@ -825,53 +829,58 @@
       filter: saturate(0.6);
     }
 
-		.marquee-wrap {
-	  overflow: hidden;
-	  border-top: 1px solid var(--color-border);
-	  border-bottom: 1px solid var(--color-border);
-	  padding: var(--space-4) 0;
-	  background: var(--color-surface);
-	  position: relative;
-	  z-index: 3;
-	}
-	.marquee-track {
-	  display: flex;
-	  gap: var(--space-6);
-	  width: max-content;
-	  will-change: transform;
-	  transform: translate3d(0,0,0);
-	  animation: marquee 28s linear infinite;
-	}
-	.marquee-set {
-	  display: flex;
-	  gap: var(--space-6);
-	}
-	@keyframes marquee {
-	  0%   { transform: translate3d(0,0,0); }
-	  100% { transform: translate3d(-50%,0,0); }
-	}
-	.marquee-item {
-	  display: inline-flex;
-	  align-items: center;
-	  gap: var(--space-6);
-	  font-family: var(--font-display);
-	  font-size: var(--text-lg);
-	  color: var(--color-text-faint);
-	  white-space: nowrap;
-	  user-select: none;
-	}
-	.marquee-item .accent { color: var(--color-primary); }
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-4) 0;
+      background: var(--color-surface);
+      position: relative;
+      z-index: 3;
+    }
+    .marquee-track {
+      display: flex;
+      gap: var(--space-6);
+      width: max-content;
+      will-change: transform;
+      transform: translate3d(0,0,0);
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-set {
+      display: flex;
+      gap: var(--space-6);
+    }
+    @keyframes marquee {
+      0%   { transform: translate3d(0,0,0); }
+      100% { transform: translate3d(-50%,0,0); }
+    }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-6);
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-text-faint);
+      white-space: nowrap;
+      user-select: none;
+    }
+    .marquee-item .accent { color: var(--color-primary); }
 
-	@media (prefers-reduced-motion: reduce) {
-	  .marquee-wrap { overflow: visible; }
-	  .marquee-track {
-		flex-wrap: wrap;
-		width: 100%;
-		justify-content: center;
-	  }
-	  .marquee-set { flex-wrap: wrap; justify-content: center; }
-	  .marquee-dup { display: none; }
-	}
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-wrap { overflow: visible; }
+      .marquee-track {
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+      }
+      .marquee-set { flex-wrap: wrap; justify-content: center; }
+      .marquee-dup { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) and (max-width: 600px) {
+      .marquee-wrap { padding: var(--space-2) 0; }
+      .marquee-track, .marquee-set { gap: var(--space-2); }
+      .marquee-item { font-size: var(--text-xs); gap: var(--space-1); }
+    }
 
     .fade-in,
     .reveal-up {
@@ -911,6 +920,16 @@
     @keyframes bar-bounce {
       0%, 100% { height: 6px; }
       50% { height: 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .viz-bar { animation: none; }
+      .viz-bar:nth-child(1) { height: 14px; }
+      .viz-bar:nth-child(2) { height: 24px; }
+      .viz-bar:nth-child(3) { height: 10px; }
+      .viz-bar:nth-child(4) { height: 28px; }
+      .viz-bar:nth-child(5) { height: 18px; }
+      .viz-bar:nth-child(6) { height: 22px; }
+      .viz-bar:nth-child(7) { height: 12px; }
     }
 
     #nav-toggle {
@@ -1026,9 +1045,7 @@
     <h1>
       <span class="glitch-wrap" data-text="cqgator">cqgator</span>
     </h1>
-    <p id="hero-sub">
-      <a href="https://open.spotify.com/track/2qoOg5dS5bzpu2sxng0dLh" target="_blank" rel="noopener noreferrer">when i need you</a>
-    </p>
+    <p id="hero-sub">latest release: <a href="https://open.spotify.com/track/2qoOg5dS5bzpu2sxng0dLh" target="_blank" rel="noopener noreferrer">when i need you</a></p>
   </div>
   <div id="hero-scroll">
     <div id="hero-scroll-line"></div>
@@ -1039,28 +1056,28 @@
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     <div class="marquee-set">
-      <span class="marquee-item">charlie<span class="accent">✦</span></span>
-      <span class="marquee-item">artist<span class="accent">✦</span></span>
-      <span class="marquee-item">dj<span class="accent">✦</span></span>
-      <span class="marquee-item">hiker<span class="accent">✦</span></span>
-      <span class="marquee-item">cinephile<span class="accent">✦</span></span>
-      <span class="marquee-item">sports fan<span class="accent">✦</span></span>
-      <span class="marquee-item">skier<span class="accent">✦</span></span>
-      <span class="marquee-item">gator<span class="accent">✦</span></span>
-      <span class="marquee-item">american<span class="accent">✦</span></span>
-      <span class="marquee-item">canadian<span class="accent">✦</span></span>
+      <span class="marquee-item"><span class="accent">✦</span>charlie</span>
+      <span class="marquee-item"><span class="accent">✦</span>artist</span>
+      <span class="marquee-item"><span class="accent">✦</span>dj</span>
+      <span class="marquee-item"><span class="accent">✦</span>hiker</span>
+      <span class="marquee-item"><span class="accent">✦</span>cinephile</span>
+      <span class="marquee-item"><span class="accent">✦</span>sports fan</span>
+      <span class="marquee-item"><span class="accent">✦</span>skier</span>
+      <span class="marquee-item"><span class="accent">✦</span>gator</span>
+      <span class="marquee-item"><span class="accent">✦</span>american</span>
+      <span class="marquee-item"><span class="accent">✦</span>canadian</span>
     </div>
     <div class="marquee-set marquee-dup">
-      <span class="marquee-item">charlie<span class="accent">✦</span></span>
-      <span class="marquee-item">artist<span class="accent">✦</span></span>
-      <span class="marquee-item">dj<span class="accent">✦</span></span>
-      <span class="marquee-item">hiker<span class="accent">✦</span></span>
-      <span class="marquee-item">cinephile<span class="accent">✦</span></span>
-      <span class="marquee-item">sports fan<span class="accent">✦</span></span>
-      <span class="marquee-item">skier<span class="accent">✦</span></span>
-      <span class="marquee-item">gator<span class="accent">✦</span></span>
-      <span class="marquee-item">american<span class="accent">✦</span></span>
-      <span class="marquee-item">canadian<span class="accent">✦</span></span>
+      <span class="marquee-item"><span class="accent">✦</span>charlie</span>
+      <span class="marquee-item"><span class="accent">✦</span>artist</span>
+      <span class="marquee-item"><span class="accent">✦</span>dj</span>
+      <span class="marquee-item"><span class="accent">✦</span>hiker</span>
+      <span class="marquee-item"><span class="accent">✦</span>cinephile</span>
+      <span class="marquee-item"><span class="accent">✦</span>sports fan</span>
+      <span class="marquee-item"><span class="accent">✦</span>skier</span>
+      <span class="marquee-item"><span class="accent">✦</span>gator</span>
+      <span class="marquee-item"><span class="accent">✦</span>american</span>
+      <span class="marquee-item"><span class="accent">✦</span>canadian</span>
     </div>
   </div>
 </div>
@@ -1212,7 +1229,7 @@
         <ul class="watch-list fade-in" id="watch-list">
           <li class="watch-loading">loading…</li>
         </ul>
-        <a href="https://letterboxd.com/cqgator/" target="_blank" rel="noopener noreferrer" class="watch-footer-link">full diary on letterboxd →</a>
+        <a href="https://letterboxd.com/cqgator/" target="_blank" rel="noopener noreferrer" class="watch-footer-link">letterboxd profile <span>→</span></a>
       </div>
     </div>
   </div>
@@ -1267,8 +1284,8 @@
 </section>
 
 <footer>
-  <p>© 2026 cqgator <span class="flag-nod" aria-hidden="true">🇺🇸🇨🇦</span></p>
-  <p>enjoy</p>
+  <p><span class="copy-mark" aria-hidden="true">©</span> 2026 cqgator <span class="flag-nod" aria-hidden="true">🇺🇸🇨🇦</span></p>
+  <p>enjoy :)</p>
 </footer>
 
 <div id="lb-overlay" role="dialog" aria-modal="true" aria-label="Image">
@@ -1311,7 +1328,7 @@
     const closeBtn = document.getElementById('mobile-nav-close');
 
     toggle.addEventListener('click', function () {
-      mobileNav.classList.add('open');
+      mobileNav.classList.toggle('open');
     });
     closeBtn.addEventListener('click', function () {
       mobileNav.classList.remove('open');
@@ -1331,40 +1348,40 @@
       document.body.classList.add('lb-open');
       document.body.style.overflow = 'hidden';
     }
-	function closeLightbox() {
-	  lbOverlay.classList.remove('open');
-	  document.body.classList.remove('lb-open');
-	  document.body.style.overflow = '';
-	  lbImg.removeAttribute('src');
-	}
+    function closeLightbox() {
+      lbOverlay.classList.remove('open');
+      document.body.classList.remove('lb-open');
+      document.body.style.overflow = '';
+      lbImg.removeAttribute('src');
+    }
 
-	const galleryGrid = document.getElementById('gallery-grid');
-	if (galleryGrid) {
-	  fetch('images/recents/manifest.json')
-		.then(function (res) { return res.json(); })
-		.then(function (files) {
-		  const images = files.slice(0, 4);
-		  if (!images.length) throw new Error('empty manifest');
+    const galleryGrid = document.getElementById('gallery-grid');
+    if (galleryGrid) {
+      fetch('images/recents/manifest.json')
+        .then(function (res) { return res.json(); })
+        .then(function (files) {
+          const images = files.slice(0, 4);
+          if (!images.length) throw new Error('empty manifest');
 
-		  galleryGrid.innerHTML = '';
-		  images.forEach(function (name) {
-			const btn = document.createElement('button');
-			btn.type = 'button';
-			btn.className = 'gallery-item';
-			btn.innerHTML =
-			  '<img src="images/recents/' + name + '" alt="" loading="lazy">' +
-			  '<span class="gallery-item-overlay"></span>';
-			btn.addEventListener('click', function () {
-			  const img = btn.querySelector('img');
-			  if (img) openLightbox(img.src);
-			});
-			galleryGrid.appendChild(btn);
-		  });
-		})
-		.catch(function () {
-		  galleryGrid.innerHTML = '<li class="watch-empty" style="list-style:none;">gallery unavailable right now</li>';
-		});
-	}
+          galleryGrid.innerHTML = '';
+          images.forEach(function (name) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'gallery-item';
+            btn.innerHTML =
+              '<img src="images/recents/' + name + '" alt="" loading="lazy">' +
+              '<span class="gallery-item-overlay"></span>';
+            btn.addEventListener('click', function () {
+              const img = btn.querySelector('img');
+              if (img) openLightbox(img.src);
+            });
+            galleryGrid.appendChild(btn);
+          });
+        })
+        .catch(function () {
+          galleryGrid.innerHTML = '<li class="watch-empty" style="list-style:none;">gallery unavailable right now</li>';
+        });
+    }
 
     lbOverlay.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', function (e) {

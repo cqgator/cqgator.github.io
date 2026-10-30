@@ -840,7 +840,7 @@
     }
     .marquee-track {
       display: flex;
-      gap: var(--space-6);
+      gap: 0;
       width: max-content;
       will-change: transform;
       transform: translate3d(0,0,0);
@@ -849,6 +849,7 @@
     .marquee-set {
       display: flex;
       gap: var(--space-6);
+      padding-right: var(--space-6);
     }
     @keyframes marquee {
       0%   { transform: translate3d(0,0,0); }
@@ -1464,28 +1465,64 @@
     --------------------------------------------------------------- */
     const watchList = document.getElementById('watch-list');
     if (watchList) {
-      const feedUrl = 'https://letterboxd.com/cqgator/rss/';
-      const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feedUrl);
+      const feedUrl = 'https://embed.letterboxd.com/cqgator/rss/';
+      const esc = function (s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      };
 
-      fetch(apiUrl)
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-          if (!data.items || !data.items.length) throw new Error('empty feed');
-          const items = data.items.slice(0, 5);
+      /* Try the feed directly first, then fall back through public CORS
+         proxies in order until one returns valid XML. */
+      const sources = [
+        function (u) { return u; },
+        function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); },
+        function (u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
+        function (u) { return 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u); }
+      ];
+
+      const fetchItems = function (i) {
+        if (i >= sources.length) return Promise.reject(new Error('all sources failed'));
+        const ctrl = new AbortController();
+        const timer = setTimeout(function () { ctrl.abort(); }, 8000);
+        return fetch(sources[i](feedUrl), { signal: ctrl.signal })
+          .then(function (res) {
+            if (!res.ok) throw new Error('http ' + res.status);
+            return res.text();
+          })
+          .then(function (text) {
+            clearTimeout(timer);
+            const xml = new DOMParser().parseFromString(text, 'text/xml');
+            const nodes = Array.prototype.slice.call(xml.querySelectorAll('item'));
+            if (!nodes.length) throw new Error('empty feed');
+            return nodes.slice(0, 5).map(function (n) {
+              const get = function (tag) {
+                const el = n.getElementsByTagName(tag)[0];
+                return el ? el.textContent : '';
+              };
+              const m = get('description').match(/<img[^>]+src="([^"]+)"/);
+              return { title: get('title'), link: get('link'), pubDate: get('pubDate'), poster: m ? m[1] : '' };
+            });
+          })
+          .catch(function () {
+            clearTimeout(timer);
+            return fetchItems(i + 1);
+          });
+      };
+
+      fetchItems(0)
+        .then(function (items) {
           watchList.innerHTML = '';
           items.forEach(function (item) {
-            const posterMatch = (item.description || item.content || '').match(/<img[^>]+src="([^"]+)"/);
-            const poster = posterMatch ? posterMatch[1] : '';
             const date = new Date(item.pubDate);
-            const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
+            const dateStr = isNaN(date) ? '' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
             const li = document.createElement('li');
             li.className = 'watch-item';
             li.innerHTML =
-              '<a href="' + item.link + '" target="_blank" rel="noopener noreferrer">' +
-                (poster ? '<img class="watch-poster" src="' + poster + '" alt="" loading="lazy">' : '') +
+              '<a href="' + esc(item.link) + '" target="_blank" rel="noopener noreferrer">' +
+                (item.poster ? '<img class="watch-poster" src="' + esc(item.poster) + '" alt="" loading="lazy">' : '') +
                 '<span class="watch-meta">' +
-                  '<span class="watch-title">' + item.title + '</span>' +
+                  '<span class="watch-title">' + esc(item.title) + '</span>' +
                   '<span class="watch-date">' + dateStr + '</span>' +
                 '</span>' +
               '</a>';
@@ -1496,6 +1533,35 @@
           watchList.innerHTML = '<li class="watch-empty">feed unavailable right now — check the diary link below</li>';
         });
     }
+  })();
+
+  /* Marquee: repeat the items until one set is wider than the viewport
+     (so zooming out never reveals a gap), then clone it for the loop. */
+  (function () {
+    const track = document.querySelector('.marquee-track');
+    if (!track) return;
+    const base = track.querySelector('.marquee-set:not(.marquee-dup)');
+    const dup = track.querySelector('.marquee-dup');
+    if (!base || !dup) return;
+    const originals = Array.prototype.slice.call(base.children).map(function (n) { return n.cloneNode(true); });
+    const build = function () {
+      base.innerHTML = '';
+      originals.forEach(function (n) { base.appendChild(n.cloneNode(true)); });
+      let guard = 0;
+      while (base.scrollWidth < window.innerWidth * 1.2 && guard++ < 20) {
+        originals.forEach(function (n) { base.appendChild(n.cloneNode(true)); });
+      }
+      dup.innerHTML = base.innerHTML;
+    };
+    build();
+    let last = window.innerWidth, t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        if (window.innerWidth > last) build();
+        last = window.innerWidth;
+      }, 150);
+    });
   })();
 </script>
 

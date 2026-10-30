@@ -1604,6 +1604,8 @@
     const base = track.querySelector('.marquee-set:not(.marquee-dup)');
     const dup = track.querySelector('.marquee-dup');
     if (!base || !dup) return;
+    /* Reduced motion shows a static wrapped list (see CSS), so don't repeat items. */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const originals = Array.prototype.slice.call(base.children).map(function (n) { return n.cloneNode(true); });
     const build = function () {
       base.innerHTML = '';
